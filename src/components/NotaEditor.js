@@ -8,19 +8,33 @@ export default function NotaEditor() {
 
   const salvaNota = async (value) => {
     try {
+      const novoId = await geraId()
       const umaNota = {
-        id: '1',
+        id: novoId.toString(),
         texto: texto
       }
+      console.log(umaNota)
       await AsyncStorage.setItem(umaNota.id, umaNota.texto)
+
       mostraNota()
     } catch (e) {
       throw new Error(e)
     }
   }
 
+  async function geraId() {
+    const todasChaves = await AsyncStorage.getAllKeys() // retorna todas as chaves que estão na base de dados
+
+    if(todasChaves <= 0) {
+      return 1
+    }
+
+    // caso contrário...
+    return todasChaves.length + 1
+  }
+
   async function mostraNota() {
-    console.log(await AsyncStorage.getItem("1"))
+    
   }
 
   return(
