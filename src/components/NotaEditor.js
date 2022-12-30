@@ -1,6 +1,7 @@
 import { Picker } from "@react-native-picker/picker"
 import React, { useState } from "react"
 import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from "react-native"
+import { adicionaNota } from "../services/Notas"
 
 export default function NotaEditor({ mostraNotas }) {
 
@@ -12,11 +13,13 @@ export default function NotaEditor({ mostraNotas }) {
   const salvaNota = async () => {
     try {
       const umaNota = {
-        id: "1",
+        titulo: titulo,
+        categoria: categoria,
         texto: texto
       }
+      
+      await adicionaNota(umaNota)
 
-      console.log(umaNota)
       mostraNotas()
     } catch (e) {
       throw new Error(e)
