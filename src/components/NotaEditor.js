@@ -3,7 +3,6 @@ import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function NotaEditor() {
-
   const [texto, setTexto] = useState("")
   const [modalVisivel, setModalVisivel] = useState(false)
 
