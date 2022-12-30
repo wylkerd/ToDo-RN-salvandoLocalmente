@@ -2,21 +2,21 @@ import React, { useState } from "react"
 import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from "react-native"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function NotaEditor() {
+export default function NotaEditor({ mostraNotas }) {
   const [texto, setTexto] = useState("")
   const [modalVisivel, setModalVisivel] = useState(false)
 
-  const salvaNota = async (value) => {
+  const salvaNota = async () => {
     try {
       const novoId = await geraId()
       const umaNota = {
         id: novoId.toString(),
         texto: texto
       }
+
       console.log(umaNota)
       await AsyncStorage.setItem(umaNota.id, umaNota.texto)
-
-      mostraNota()
+      mostraNotas()
     } catch (e) {
       throw new Error(e)
     }
@@ -31,10 +31,6 @@ export default function NotaEditor() {
 
     // caso contrário...
     return todasChaves.length + 1
-  }
-
-  async function mostraNota() {
-    
   }
 
   return(
